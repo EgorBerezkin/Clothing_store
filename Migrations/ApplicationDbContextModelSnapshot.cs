@@ -2,8 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 #nullable disable
 
@@ -21,66 +24,53 @@ namespace EventManager.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("EventManager.Model.Event", b =>
+            modelBuilder.Entity("Clothes_Store.Model.Clothes", b =>
             {
-                b.Property<int>("Id")
+                b.Property<string>("Naimenovanie")
                     .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
+                    .HasColumnType("string");
+                
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<string>("Naimenovanie"));
 
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                b.Property<string>("Category")
+                    .HasColumnType("string");
 
-                b.Property<string>("Description")
-                    .HasColumnType("nvarchar(max)");
+                b.Property<string>("Size")
+                    .HasColumnType("string");
 
-                b.Property<DateTime>("EventDate")
-                    .HasColumnType("datetime2");
+                b.Property<string>("Color")
+                    .HasColumnType("string");
 
-                b.Property<int?>("EventId")
-                    .HasColumnType("int");
+                b.Property<string>("Material")
+                    .HasColumnType("string");
 
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                b.Property<double>("Price")
+                    .HasColumnType("double");
 
-                b.Property<string>("location")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                b.HasKey("Naimenovanie");
 
-                b.HasKey("Id");
-
-                b.ToTable("Events");
+                b.ToTable("Clothes");
             });
 
-            modelBuilder.Entity("EventManager.Model.EventParticipsnt", b =>
+            modelBuilder.Entity("Clothes_Store.Model.Buyer", b =>
             {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("int");
+                b.Property<string>("FIO")
+                    .HasColumnType("string");
 
-                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<string>("FIO"));
+
+                b.Property<string>("Telefon")
+                    .HasColumnType("string");
 
                 b.Property<string>("Email")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                    .HasColumnType("string");
 
-                b.Property<int>("EventId")
-                    .HasColumnType("int");
+                b.Property<DataType>("Data_BirthDay")
+                    .HasColumnType("DataType");
 
-                b.Property<string>("LastName")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
+                b.HasKey("FIO");
 
-                b.Property<string>("Name")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.Property<string>("Phone")
-                    .IsRequired()
-                    .HasColumnType("nvarchar(max)");
-
-                b.HasKey("Id");
-
-                b.ToTable("EventsParticipsnt");
+                b.ToTable("Buyer");
             });
 #pragma warning restore 612, 618
         }

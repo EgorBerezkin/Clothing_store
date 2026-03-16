@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -15,34 +16,30 @@ namespace EventManager.Migrations
                 name: "Clothes",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EventDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    location = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EventId = table.Column<int>(type: "int", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Naimenovanie = table.Column<string>(type: "string", nullable: false),
+                    Category = table.Column<string>(type: "string", nullable: false),
+                    Size = table.Column<string>(type: "string", nullable: false),
+                    Color = table.Column<string>(type: "string", nullable: false),
+                    Material = table.Column<string>(type: "string", nullable: false),
+                    Price = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.Id);
+                    table.PrimaryKey("Clothing", x => x.Naimenovanie);
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventsParticipsnt",
+                name: "Buyers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EventId = table.Column<int>(type: "int", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    FIO = table.Column<string>(type: "string", nullable: false),
+                    Telefon = table.Column<string>(type: "string", nullable: false),
+                    Email = table.Column<string>(type: "string", nullable: false),
+                    Data_BirthDay = table.Column<DataType>(type: "DataType", nullable: false),
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventsParticipsnt", x => x.Id);
+                    table.PrimaryKey("Buyer", x => x.FIO);
                 });
         }
 
@@ -50,10 +47,10 @@ namespace EventManager.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Events");
+                name: "Clothes");
 
             migrationBuilder.DropTable(
-                name: "EventsParticipsnt");
+                name: "Byuers");
         }
     }
 }
