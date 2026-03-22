@@ -1,6 +1,5 @@
 ﻿using Magazin_odejdi.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Magazin_odejdi.Data
 {
