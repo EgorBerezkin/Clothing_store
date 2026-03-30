@@ -1,0 +1,17 @@
+﻿@page
+@model Magazin_odejdi.Pages.Buyers.DetailsModel
+@{
+}
+
+<h1>Информация об участнике</h1>
+
+<div>
+    <p><strong>ФИО:</strong> @Model.Buyer.FIO</p>
+    <p><strong>Телефон:</strong> @Model.Buyer.Telefon</p>
+    <p><strong>Email:</strong> @Model.Buyer.Email</p>
+    <p><strong>Дата рождения:</strong> @Model.Buyer.Data_BirthDay</p>
+</div>
+
+<p>
+    <a asp-page="Index">Назад к списку</a>
+</p>

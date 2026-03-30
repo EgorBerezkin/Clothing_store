@@ -1,0 +1,38 @@
+﻿@page
+@model Magazin_odejdi.Pages.Buyers.IndexModel
+@{
+}
+
+<h1>Список участников</h1>
+
+<p>
+    <a asp-page="Create">Добавить нового участника</a>
+</p>
+
+<table border="1" cellpadding="4">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Дата рождения</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var buyer in Model.Buyers)
+        {
+            <tr>
+                <td>@buyer.FIO</td>
+                <td>@buyer.Telefon</td>
+                <td>@buyer.Email</td>
+                <td>@buyer.Data_BirthDay</td>
+                <td>
+                    <a asp-page="Details" asp-route-id="@buyer.FIO">Открыть</a>
+                    <a asp-page="Edit" asp-route-id="@buyer.FIO">Изменить</a>
+                    <a asp-page="Delete" asp-route-id="@buyer.FIO">Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

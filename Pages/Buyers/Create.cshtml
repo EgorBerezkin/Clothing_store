@@ -1,0 +1,26 @@
+﻿@page
+@model Magazin_odejdi.Pages.Buyers.CreateModel
+@{
+}
+        
+<h1>Добавить покупателя</h1>
+<form method="post">
+    <div>
+        <label>ФИО</label><br />
+        <input asp-for="Buyer.FIO" />
+        <span asp-validation-for="Buyer.FIO"></span>
+    </div>
+    <div>
+        <label>Телефон</label><br />
+        <input asp-for="Buyer.Telefon" />
+    </div>
+    <div>
+        <label>Email</label><br />
+        <input asp-for="Buyer.Email" type="email" />
+    </div>
+    <div class="Дата рождения">
+        <input asp-for="Buyer.Data_BirthDay"/>
+        <span asp-validation-for="Buyer.Data_BirthDay"></span>
+    </div>
+</form>
+<a asp-asp-page="Index">Назад</a>

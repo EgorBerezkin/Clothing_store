@@ -1,0 +1,26 @@
+﻿@page
+@model Magazin_odejdi.Pages.Buyers.EditModel
+@{
+}
+
+<h1>Редактировать участника</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="Buyer.FIO" />
+    <div>
+        <label>Телефон</label><br />
+        <input asp-for="Buyer.Telefon" />
+    </div>
+    <div>
+        <label>Email</label><br />
+        <input asp-for="Buyer.Email" type="email" />
+    </div>
+    <div>
+        <label>Дата рождения</label><br />
+        <input asp-for="Buyer.Data_BirthDay" type="date" />
+    </div>
+
+    <button type="submit">Сохранить</button>
+</form>
+
+<a asp-page="Index">Назад</a>
