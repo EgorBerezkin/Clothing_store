@@ -34,7 +34,7 @@ namespace Magazin_odejdi.Pages.Buyers
             if (participant != null)
             {
                 _context.Buyers.Remove(participant);
-                _context.SaveChanges();
+                //_context.SaveChanges();
             }
 
             return RedirectToPage("Index");

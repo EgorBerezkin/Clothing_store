@@ -1,0 +1,46 @@
+﻿@page
+@model Magazin_odejdi.Pages.Clothess.CreateModel
+@{
+	ViewData["Title"] = "Добавить одежду";
+}
+
+<h1>Добавить одежду</h1>
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Название</label>
+        <input asp-for="Clothes.Naimenovanie" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Clothes.Naimenovanie" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Категория</label>
+        <input asp-for="Clothes.Category" class="form-control" />
+        <span asp-validation-for="Clothes.Category" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Размер</label>
+        <input asp-for="Clothes.Size" class="form-control" type="number" />
+        <span asp-validation-for="Clothes.Size" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Цвет</label>
+        <input asp-for="Clothes.Color" class="form-control" type="number" />
+        <span asp-validation-for="Clothes.Color" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Материал</label>
+        <textarea asp-for="Clothes.Material" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Clothes.Material" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a asp-page="Index" class="btn btn-secondary">Назад к списку</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
