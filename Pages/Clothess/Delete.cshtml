@@ -1,0 +1,75 @@
+﻿@page
+@model Magazin_odejdi.Pages.Clothess.DeleteModel
+@{
+    ViewData["Title"] = "Удалить товар";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card border-danger shadow-sm">
+
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Удалить товар</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        Вы уверены, что хотите удалить этот товар?
+                    </div>
+
+                    <div class="mb-3">
+
+                        <h5 class="card-title">@Model.Clothes.Naimenovanie</h5>
+
+                        <p class="card-text text-muted">
+                            Категория: @Model.Clothes.Category
+                        </p>
+
+                        <p class="card-text">
+                            Размер: <span class="badge bg-secondary">@Model.Clothes.Size</span>
+                        </p>
+
+                        <p class="card-text">
+                            Цвет: <span class="badge bg-info">@Model.Clothes.Color</span>
+                        </p>
+
+                        <p class="card-text">
+                            Материал: <span class="badge bg-info">@Model.Clothes.Material</span>
+                        </p>
+
+                        <p class="card-text">
+                            Цена: <span class="badge bg-info">@Model.Clothes.Price</span>
+                        </p>
+
+                    </div>
+
+                    <form method="post">
+
+                        <input type="hidden" asp-for="Clothes.Id" />
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-page="Index" class="btn btn-secondary">
+                                Отмена
+                            </a>
+
+                            <button type="submit" class="btn btn-danger">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

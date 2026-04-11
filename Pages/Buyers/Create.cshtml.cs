@@ -9,7 +9,6 @@ namespace Magazin_odejdi.Pages.Buyers
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-
         public CreateModel(ApplicationDbContext context)
         {
             _context = context;
@@ -17,9 +16,7 @@ namespace Magazin_odejdi.Pages.Buyers
 
         [BindProperty]
         public Buyer Buyer { get; set; }
-
         public void OnGet() { }
-
         public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
@@ -30,5 +27,6 @@ namespace Magazin_odejdi.Pages.Buyers
 
             return RedirectToPage("Index");
         }
+
     }
 }

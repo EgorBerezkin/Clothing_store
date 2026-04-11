@@ -3,20 +3,40 @@
 @{
 }
 
-<h1>Удалить покупателя</h1>
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
 
-<h3>Вы уверены?</h3>
+        <div class="card border-danger shadow-sm mt-4">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">Подтверждение удаления</h5>
+            </div>
 
-<div>
-    <p><strong>@Model.Buyer.FIO</strong></p>
-    <p>Телефон: @Model.Buyer.Telefon</p>
-    <p>Email: @Model.Buyer.Email</p>
-    <p>Дата рождения: @Model.Buyer.Data_BirthDay</p>
+            <div class="card-body">
+                <p class="mb-3">
+                    Вы действительно хотите удалить клиента:
+                </p>
+
+                <div class="alert alert-light border">
+                    <strong>@Model.Buyer.FIO</strong><br />
+                    <small class="text-muted">@Model.Buyer.Email</small>
+                </div>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Buyer.Id" />
+
+                    <div class="d-flex justify-content-between">
+                        <a asp-page="Index" class="btn btn-outline-secondary">
+                            Отмена
+                        </a>
+
+                        <button type="submit" class="btn btn-danger">
+                            Удалить
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
 </div>
-
-<form method="post">
-    <input type="hidden" asp-for="Buyer.FIO" />
-    <button type="submit">Удалить</button>
-</form>
-
-<a asp-page="Index">Отмена</a>

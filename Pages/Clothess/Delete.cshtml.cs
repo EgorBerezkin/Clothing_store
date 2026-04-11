@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Magazin_odejdi.Data;
 using Magazin_odejdi.Model;
 
-namespace Magazin_odejdi.Pages.Buyers
+namespace Magazin_odejdi.Pages.Clothess
 {
     public class DeleteModel : PageModel
     {
@@ -15,13 +20,14 @@ namespace Magazin_odejdi.Pages.Buyers
         }
 
         [BindProperty]
-        public Buyer Buyer { get; set; }
+        public Clothes? Clothes { get; set; }
 
         public IActionResult OnGet(int id)
         {
-            Buyer = _context.Buyers.Find(id);
+            Clothes = _context.Clothess.FirstOrDefault(c => c.Id == id);
+            
 
-            if (Buyer == null)
+            if (Clothes == null)
                 return NotFound();
 
             return Page();
@@ -29,11 +35,11 @@ namespace Magazin_odejdi.Pages.Buyers
 
         public IActionResult OnPost()
         {
-            var buyer = _context.Buyers.Find(Buyer.Id);
+            var book = _context.Clothess.Find(Clothes.Id);
 
-            if (buyer != null)
+            if (book != null)
             {
-                _context.Buyers.Remove(buyer);
+                _context.Clothess.Remove(book);
                 _context.SaveChanges();
             }
 

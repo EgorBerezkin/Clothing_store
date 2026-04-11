@@ -33,7 +33,7 @@ namespace Magazin_odejdi.Pages.Buyers
                 return Page();
 
             _context.Buyers.Update(Buyer);
-            //_context.SaveChanges();
+            _context.SaveChanges();
 
             return RedirectToPage("Index");
         }

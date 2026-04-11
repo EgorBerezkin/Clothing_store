@@ -3,36 +3,82 @@
 @{
 }
 
-<h1>Список участников</h1>
+<div class="row justify-content-center">
+    <div class="col-12 col-lg-10">
 
-<p>
-    <a asp-page="Create">Добавить нового участника</a>
-</p>
+        <div class="card shadow-sm mt-4">
+            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Список студентов</h5>
 
-<table border="1" cellpadding="4">
-    <thead>
-        <tr>
-            <th>ФИО</th>
-            <th>Телефон</th>
-            <th>Email</th>
-            <th>Дата рождения</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var buyer in Model.Buyers)
-        {
-            <tr>
-                <td>@buyer.FIO</td>
-                <td>@buyer.Telefon</td>
-                <td>@buyer.Email</td>
-                <td>@buyer.Data_BirthDay</td>
-                <td>
-                    <a asp-page="Details" asp-route-id="@buyer.FIO">Открыть</a>
-                    <a asp-page="Edit" asp-route-id="@buyer.FIO">Изменить</a>
-                    <a asp-page="Delete" asp-route-id="@buyer.FIO">Удалить</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                <a asp-page="Create" class="btn btn-light btn-sm">
+                    + Добавить клиента
+                </a>
+            </div>
+
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+                    <table class="table table-hover table-striped mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Фамилия</th>
+                                <th>Телефон</th>
+                                <th>Почта</th>
+                                <th>Дата рождения</th>
+                                <th class="text-end">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var buyer in Model.Buyers)
+                            {
+                                <tr>
+                                    <td class="fw-semibold">
+                                        @buyer.FIO
+                                    </td>
+
+                                    <td>
+                                        @(string.IsNullOrEmpty(buyer.Telefon)
+                                                                            ? "—"
+                                                                            : buyer.Telefon)
+                                </td>
+
+                                    <td>
+                                        <span class="text-muted">
+                                            @buyer.Email
+                                        </span>
+                                    </td>
+
+                                    <td>
+                                        @buyer.Data_BirthDay.ToShortDateString()
+                                    </td>
+
+                                    <td class="text-end">
+                                        <a asp-page="Details"
+                                           asp-route-id="@buyer.Id"
+                                           class="btn btn-sm btn-outline-primary me-1">
+                                            Открыть
+                                        </a>
+
+                                        <a asp-page="Edit"
+                                           asp-route-id="@buyer.Id"
+                                           class="btn btn-sm btn-outline-warning me-1">
+                                            Изменить
+                                        </a>
+
+                                        <a asp-page="Delete"
+                                           asp-route-id="@buyer.Id"
+                                           class="btn btn-sm btn-outline-danger">
+                                            Удалить
+                                        </a>
+                                    </td>
+                                </tr>
+                                                        }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
