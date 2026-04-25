@@ -4,8 +4,10 @@ namespace Magazin_odejdi.Model
 {
     public class Clothes : EFModel
     {
-        [Required(ErrorMessage = "Пожалуйста, заполните поле имя")]
+        
         public string? Naimenovanie { get; set; }
+        [Required(ErrorMessage = "Пожалуйста, заполните поле имя")]
+
         public string? Category { get; set; }
         public string? Size { get; set; } // размер одежды
         public string? Color { get; set; }
