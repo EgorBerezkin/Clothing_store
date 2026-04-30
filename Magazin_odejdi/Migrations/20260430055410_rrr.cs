@@ -27,6 +27,7 @@ namespace Magazin_odejdi.Migrations
                     table.PrimaryKey("PK_AuthUsers", x => x.Id);
                 });
 
+
             migrationBuilder.CreateTable(
                 name: "Buyers",
                 columns: table => new
