@@ -1,10 +1,12 @@
 using Magazin_odejdi.Data;
-using Magazin_odejdi.Model;
+using Magazin_odejdi.Model.AuthApp;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Magazin_odejdi.Pages.Buyers
+namespace Magazin_odejdi.Pages.Account.Users
 {
+    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
@@ -14,16 +16,17 @@ namespace Magazin_odejdi.Pages.Buyers
             _context = context;
         }
 
-        public Buyer Buyer { get; set; }
+        public AuthUser User { get; set; }
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Buyer = _context.Buyers.FirstOrDefault(s => s.Id == id);
+            User = await _context.AuthUsers.FindAsync(id);
 
-            if (Buyer == null)
+            if (User == null)
                 return NotFound();
 
             return Page();
         }
+
     }
 }

@@ -1,10 +1,11 @@
-﻿using Magazin_odejdi.Data;
-using Magazin_odejdi.Model;
+using Magazin_odejdi.Data;
+using Magazin_odejdi.Model.AuthApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
-namespace Magazin_odejdi.Pages.Buyers
+namespace Magazin_odejdi.Pages.Account.Users
 {
     [Authorize]
     public class IndexModel : PageModel
@@ -16,11 +17,11 @@ namespace Magazin_odejdi.Pages.Buyers
             _context = context;
         }
 
-        public List<Buyer> Buyers { get; set; }
+        public IList<AuthUser> Users { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Buyers = _context.Buyers.ToList();
+            Users = await _context.AuthUsers.ToListAsync();
         }
     }
 }
