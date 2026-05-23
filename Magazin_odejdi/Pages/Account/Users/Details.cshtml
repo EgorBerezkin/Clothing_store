@@ -10,6 +10,7 @@
     <div class="card">
 
         <div class="card-body">
+            <p>
             @if (Model.User.Avatar != null)
             {
                 <div class="mb-3">
@@ -17,6 +18,7 @@
                          src="data:image/png;base64,@Convert.ToBase64String(Model.User.Avatar)" />
                 </div>
             }
+            </p>
             <p><b>Email:</b> @Model.User.Email</p>
             <p><b>Role:</b> @Model.User.Role</p>
 

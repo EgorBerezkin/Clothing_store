@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Magazin_odejdi.Pages.Account.Users
 {
-    [Authorize(Roles = "Admin")]
+    
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;
