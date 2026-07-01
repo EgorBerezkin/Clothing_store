@@ -1,0 +1,78 @@
+﻿@page
+@model Magazin_odejdi.Pages.Clothess.CreateModel
+@{
+    ViewData["Title"] = "Добавить товар";
+}
+        
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Добавить товар</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="post">
+
+                        <div class="mb-3">
+                            <label asp-for="Clothes.Naimenovanie" class="form-label">Название</label>
+                            <input asp-for="Clothes.Naimenovanie" class="form-control" />
+                            <span asp-validation-for="Clothes.Naimenovanie" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Clothes.Category" class="form-label">Категория</label>
+                            <input asp-for="Clothes.Category" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Clothes.Size" class="form-label">Размер</label>
+                            <input asp-for="Clothes.Size" type="number" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Clothes.Color" class="form-label">Цвет</label>
+                            <input asp-for="Clothes.Color" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Clothes.Material" class="form-label">Материал</label>
+                            <input asp-for="Clothes.Material" class="form-control" />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Clothes.Price" class="form-label">Цена</label>
+                            <input asp-for="Clothes.Price" type="number" class="form-control" />
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-page="Index" class="btn btn-secondary">
+                                Назад
+                            </a>
+
+                            <button type="submit" class="btn btn-success">
+                                Сохранить
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

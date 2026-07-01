@@ -1,7 +1,12 @@
+using Magazin_odejdi.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ApplicationDbContext>(Options => Options.UseSqlServer(builder.Configuration.GetConnectionString("Magazin_odejdi")));
+
 
 var app = builder.Build();
 
@@ -20,3 +25,4 @@ app.MapRazorPages()
    .WithStaticAssets();
 
 app.Run();
+
