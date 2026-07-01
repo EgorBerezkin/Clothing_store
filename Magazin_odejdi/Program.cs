@@ -49,6 +49,7 @@ app.MapRazorPages()
 
 app.MapHub<ClothesHub>("/clothesHub");
 app.MapHub<ChatHub>("/chatHub");
+app.MapHub<BuyersHub>("/buyersHub");
 
 app.Run();
 
