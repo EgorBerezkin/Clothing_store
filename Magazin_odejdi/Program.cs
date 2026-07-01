@@ -1,3 +1,4 @@
+using Magazin_odejdi.Hubs;
 using Magazin_odejdi.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ builder.Services.AddHttpContextAccessor(); // авторизаци€
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("Magazin_odejdi")));
 
-
+builder.Services.AddSignalR();
 
 // ƒобавл€ем Cookie Authentication
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -45,6 +46,9 @@ app.UseAuthorization(); // внимание эта после UseAuthentication
 app.MapStaticAssets();
 app.MapRazorPages()
    .WithStaticAssets();
+
+app.MapHub<ClothesHub>("/clothesHub");
+app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
 

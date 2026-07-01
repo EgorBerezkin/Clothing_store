@@ -1,4 +1,5 @@
 ﻿using Magazin_odejdi.Data;
+using Magazin_odejdi.Hubs;
 using Magazin_odejdi.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -15,10 +16,12 @@ namespace Magazin_odejdi.Pages.Clothess
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<ClothesHub> _hubContext;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, IHubContext<ClothesHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
@@ -43,6 +46,7 @@ namespace Magazin_odejdi.Pages.Clothess
 
             _context.Clothess.Update(Clothes);
             _context.SaveChanges();
+            _hubContext.Clients.All.SendAsync("ClothesUpdated", Clothes);
 
             return RedirectToPage("Index");
         }
