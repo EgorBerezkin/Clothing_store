@@ -1,0 +1,43 @@
+﻿@page
+@model Magazin_odejdi.Pages.Account.Users.CreateModel
+@{
+}
+<div class="container mt-4">
+
+    <h2>Добавление пользователя</h2>
+
+    <form method="post" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label asp-for="User.Email" class="form-label"></label>
+            <input asp-for="User.Email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="User.Password" class="form-label"></label>
+            <input asp-for="User.Password"
+                   type="password"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="User.Role" class="form-label"></label>
+            <input asp-for="User.Role" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="User.Avatar" class="form-label"></label>
+            <input asp-for="User.Avatar" type="file" name="AvatarFile" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Создать
+        </button>
+
+        <a asp-page="Index" class="btn btn-secondary">
+            Отмена
+        </a>
+
+    </form>
+
+</div>

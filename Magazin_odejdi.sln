@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36414.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazin_odejdi", "Magazin_odejdi.csproj", "{F1000F62-F0DC-44DE-8807-928A9D376F0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magazin_odejdi", "Magazin_odejdi\Magazin_odejdi.csproj", "{F1000F62-F0DC-44DE-8807-928A9D376F0D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Magasin.Test", "Magasin.Test\Magasin.Test.csproj", "{049EBCC2-7704-442A-A41A-45B6A8791504}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F1000F62-F0DC-44DE-8807-928A9D376F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1000F62-F0DC-44DE-8807-928A9D376F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1000F62-F0DC-44DE-8807-928A9D376F0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049EBCC2-7704-442A-A41A-45B6A8791504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049EBCC2-7704-442A-A41A-45B6A8791504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049EBCC2-7704-442A-A41A-45B6A8791504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049EBCC2-7704-442A-A41A-45B6A8791504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

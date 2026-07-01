@@ -1,0 +1,135 @@
+﻿﻿@using System.Security.Claims
+@*++ авторизация*@
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var user = HttpContextAccessor.HttpContext?.User;
+    var isAuthenticated = user?.Identity?.IsAuthenticated ?? false;
+    var userName = user?.Identity?.Name ?? "";
+    var isAdmin = user?.IsInRole("Admin") ?? false;
+    var userId = user?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+@*-- авторизация*@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Magazin_odejdi</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Magazin_odejdi.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">Магазин одежды</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Buyers/Index">Клиенты</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-page="/Clothess/Index">Товары</a>
+                        </li>
+
+                        @if (isAdmin)
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-page="/Account/Users/Index">Пользователи</a>
+                            </li>
+                        }
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (!isAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Account/Login">Войти</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Account/Register">Регистрация</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    👤 @userName
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Account/Logout">Выход</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        @*+++ темная тема*@
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
+                        </li>
+                        @*--- темная тема*@
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2026 - Magazin_odejdi - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+<script>
+    (function() {
+        const html = document.documentElement;
+        const storedTheme = localStorage.getItem('theme');   // 1. Читаем сохранённую тему
+
+        function setTheme(theme) {                           // 2. Функция установки темы + сохранение
+            html.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        if (storedTheme) {
+            setTheme(storedTheme);                           // 3. Если есть сохранённая – используем её
+        } else {
+            // 4. Иначе определяем по системе (один раз, без подписки на изменения)
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            setTheme(prefersDark ? "dark" : "light");
+        }
+
+        // 5. Глобальная функция для кнопки – переключает и сохраняет
+        window.toggleTheme = function() {
+            const currentTheme = html.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        };
+    })();
+</script>
