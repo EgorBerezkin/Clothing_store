@@ -22,7 +22,7 @@
             <div class="col-sm-6 col-md-4 col-lg-3">
 
                 <!-- Карточка книги с тенью -->
-                <div class="card h-100 shadow-sm" id="book-@clothes.Id">
+                <div class="card h-100 shadow-sm" id="clothes-@clothes.Id">
                     <div class="card-body">
 
                         <!-- Заголовок книги с иконкой и обрезкой текста -->
@@ -71,6 +71,57 @@
 
             </div>
         }
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <!-- Подключение SignalR для обновления карточек книг в реальном времени -->
+    <script>
+        // Создаём подключение к хабу ClothesHub
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/clothesHub") // Путь к хабу на сервере
+            .build();
+
+        // Слушаем событие "BookUpdated", отправляемое сервером
+        connection.on("ClothesUpdated", function (clothes) {
+            // Ищем существующую карточку по id
+            const existingCard = document.getElementById("clothes-" + clothes.id);
+
+            // HTML для новой/обновлённой карточки
+            const html = `
+                <div class="card h-100 shadow-sm" id="clothes-${clothes.id}">
+                    <div class="card-body">
+                        <h5 class="card-title text-truncate">📚 ${clothes.Naimenovanie}</h5>
+
+                        <p class="card-text mb-2">Категория: <span class="badge bg-info">${clothes.category}</span></p>
+                        <p class="card-text mb-2">Размер: <span class="badge bg-info">${clothes.size}</span></p>
+                        <p class="card-text mb-2">Цвет: <span class="badge bg-info">${clothes.color}</span></p>
+                        <p class="card-text mb-2">Материал: <span class="badge bg-info">${clothes.material}</span></p>
+                        <p class="card-text mb-2">Цена: <span class="badge bg-info">${clothes.price}</span></p>
+                        <div class="d-flex justify-content-between">
+                            <a href="/Clothes/Details?id=${clothes.id}" class="btn btn-sm btn-info">Открыть</a>
+                            <a href="/Clothes/Edit?id=${clothes.id}" class="btn btn-sm btn-warning">Изменить</a>
+                            <a href="/Clothes/Delete?id=${clothes.id}" class="btn btn-sm btn-danger">Удалить</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            if (existingCard) {
+                // Если карточка уже есть — заменяем старую на новую
+                existingCard.outerHTML = html;
+            } else {
+                // Если карточка новая — создаём div.col и добавляем в контейнер
+                const container = document.querySelector(".row");
+                const wrapper = document.createElement("div");
+                wrapper.className = "col-sm-6 col-md-4 col-lg-3";
+                wrapper.innerHTML = html;
+                container.appendChild(wrapper);
+            }
+        });
+
+        // Запуск подключения
+        connection.start().catch(err => console.error(err.toString()));
+    </script>
     </div>
 
 </div>

@@ -1,8 +1,11 @@
 ﻿using Magazin_odejdi.Data;
+using Magazin_odejdi.Hubs;
 using Magazin_odejdi.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Magazin_odejdi.Pages.Buyers
 {
@@ -10,10 +13,12 @@ namespace Magazin_odejdi.Pages.Buyers
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<BuyersHub> _hubContext;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, IHubContext<BuyersHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
@@ -36,6 +41,7 @@ namespace Magazin_odejdi.Pages.Buyers
 
             _context.Buyers.Update(Buyer);
             _context.SaveChanges();
+            _hubContext.Clients.All.SendAsync("BuyersUpdated");
 
             return RedirectToPage("Index");
         }

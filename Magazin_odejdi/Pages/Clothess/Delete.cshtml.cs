@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Magazin_odejdi.Data;
 using Magazin_odejdi.Model;
+using Microsoft.AspNetCore.SignalR;
+using Magazin_odejdi.Hubs;
 
 namespace Magazin_odejdi.Pages.Clothess
 {
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<ClothesHub> _hubContext;
 
-        public DeleteModel(ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context, IHubContext<ClothesHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
@@ -41,6 +45,8 @@ namespace Magazin_odejdi.Pages.Clothess
             {
                 _context.Clothess.Remove(book);
                 _context.SaveChanges();
+
+                _hubContext.Clients.All.SendAsync("ClothesUpdated", Clothes.Id);
             }
 
             return RedirectToPage("Index");

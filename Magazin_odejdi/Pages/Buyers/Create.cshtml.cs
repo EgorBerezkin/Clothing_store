@@ -3,6 +3,8 @@ using Magazin_odejdi.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
+using Magazin_odejdi.Hubs;
 
 
 namespace Magazin_odejdi.Pages.Buyers
@@ -11,9 +13,11 @@ namespace Magazin_odejdi.Pages.Buyers
     public class CreateModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public CreateModel(ApplicationDbContext context)
+        private readonly IHubContext<BuyersHub> _hubContext;
+        public CreateModel(ApplicationDbContext context, IHubContext<BuyersHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
@@ -26,6 +30,7 @@ namespace Magazin_odejdi.Pages.Buyers
 
             _context.Buyers.Add(Buyer);
             _context.SaveChanges();
+            _hubContext.Clients.All.SendAsync("BuyersUpdated");
 
             return RedirectToPage("Index");
         }

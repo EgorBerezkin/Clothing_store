@@ -1,8 +1,10 @@
 using Magazin_odejdi.Data;
+using Magazin_odejdi.Hubs;
 using Magazin_odejdi.Model.AuthApp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Magazin_odejdi.Pages.Account.Users
@@ -11,10 +13,12 @@ namespace Magazin_odejdi.Pages.Account.Users
     public class EditModel : PageModel
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHubContext<UsersHub> _hubContext;
 
-        public EditModel(ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, IHubContext<UsersHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
@@ -56,6 +60,7 @@ namespace Magazin_odejdi.Pages.Account.Users
             _context.Attach(User).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
+            await _hubContext.Clients.All.SendAsync("UsersUpdated");
 
             return RedirectToPage("Index");
         }

@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace Magazin_odejdi.Hubs
 {
-    public class ClothesHub : Hub
+    public class BuyersHub : Hub
     {
         // Отправка обновления одежда всем клиентам
-        public async Task SendClothesUpdate(Clothes clothes)
+        public async Task SendClothesUpdate(Buyer buyers)
         {
-            await Clients.All.SendAsync("ClothesUpdated", clothes);
+            await Clients.All.SendAsync("BuyersUpdated", buyers);
         }
     }
 }
